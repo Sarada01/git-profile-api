@@ -39,13 +39,29 @@ git-profile-api
    ```
 
 2. Install the required dependencies:
+   Enable the vitural environment for python to avoid any version conflicts
    NOTE:  This code has been validated on Python 3.6.8 AND 3.9
+   
+   ```
+   python -m venv .venv
+   ```
+   Activate virtual environment in windows environment:
+   
+   ```
+   .venv\source\activate
+   ```
+   Activate virtual environment in MAC environment:
+   ```
+   source .venv/bin/activate
+   ```
+   
    ```
    pip install -r requirements.txt
    ```
 
 ## Usage
 1. Start the Flask application:
+
    ```
    python src/app.py
    ```
@@ -68,6 +84,7 @@ The API will return a JSON response containing the merged profile data, includin
 - List and count of repository topics
 
 ## Testing
+Before launching the test case, please cancel/disconnect the previous instance of the application 
 To run the unit tests, use the following command:
 ```
 pytest src/tests
