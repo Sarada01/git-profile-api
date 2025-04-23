@@ -8,19 +8,22 @@ class GitHubService:
         self.org_name = org_name
 
     def get_organization_data(self):
-        org_data = self._fetch_organization_data()
-        repos_data = self._fetch_repositories_data()
-        
-        return {
-            "public_repos": {
-                "total": len(repos_data),
-                "original": len([repo for repo in repos_data if not repo.get('fork')]),
-                "forked": len([repo for repo in repos_data if repo.get('fork')]),
-            },
-            "followers": org_data.get('followers', 0),
-            "languages": self._get_languages_used(repos_data),
-            "topics": self._get_repo_topics(repos_data),
-        }
+        try:
+            org_data = self._fetch_organization_data()
+            repos_data = self._fetch_repositories_data()
+            
+            return {
+                "public_repos": {
+                    "total": len(repos_data),
+                    "original": len([repo for repo in repos_data if not repo.get('fork')]),
+                    "forked": len([repo for repo in repos_data if repo.get('fork')]),
+                },
+                "followers": org_data.get('followers', 0),
+                "languages": self._get_languages_used(repos_data),
+                "topics": self._get_repo_topics(repos_data),
+            }
+        except Exception as e:
+            return {"error": str(e)}
 
     def _fetch_organization_data(self):
         url = f"{self.BASE_URL}/orgs/{self.org_name}"

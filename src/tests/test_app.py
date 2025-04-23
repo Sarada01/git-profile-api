@@ -1,4 +1,10 @@
 import unittest
+import sys
+import os
+
+# Add the src directory to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+
 from app import app
 
 class AppTestCase(unittest.TestCase):
@@ -9,23 +15,30 @@ class AppTestCase(unittest.TestCase):
     def test_home_page(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data.decode(), "Welcome to the Profile API!")
 
     def test_merge_profile(self):
-        response = self.app.post('/merge-profile', json={
-            'github_org': 'mailchimp',
-            'bitbucket_team': 'mailchimp'
-        })
+        response = self.app.get('/api/profile?github_org=mailchimp&bitbucket_team=mailchimp')
         self.assertEqual(response.status_code, 200)
-        self.assertIn('total_repos', response.get_json())
-        self.assertIn('languages', response.get_json())
-        self.assertIn('topics', response.get_json())
+        response_json = response.get_json()
+        self.assertIn('public_repos', response_json)
+        self.assertIn('total', response_json['public_repos'])
+        self.assertEqual(response_json['public_repos']['total'], 40)
+        self.assertIn('languages', response_json)
+        self.assertIn('topics', response_json)
+
+    def test_merge_profile_missing_params(self):
+        response = self.app.get('/api/profile')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('error', response.get_json())
+        self.assertEqual(response.get_json()['error'], 'Both github_org and bitbucket_team are required')
 
     def test_merge_profile_invalid(self):
-        response = self.app.post('/merge-profile', json={
-            'github_org': 'invalid_org',
-            'bitbucket_team': 'invalid_team'
+        response = self.app.get('/api/profile?github_org=invalid_org&bitbucket_team=invalid_team')
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.get_json(), {
+            "error": "Failed to fetch data from GitHub or Bitbucket"
         })
-        self.assertEqual(response.status_code, 404)
 
 if __name__ == '__main__':
     unittest.main()

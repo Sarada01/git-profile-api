@@ -26,9 +26,6 @@ git-profile-api
 │   │   └── api_client.py           # Utility functions for API requests
 │   └── tests
 │       ├── test_app.py             # Unit tests for the application
-│       ├── test_github_service.py   # Unit tests for GitHubService
-│       ├── test_bitbucket_service.py # Unit tests for BitbucketService
-│       └── test_profile_controller.py # Unit tests for ProfileController
 ├── requirements.txt                 # Project dependencies
 ├── README.md                        # Project documentation
 └── .gitignore                       # Files to ignore in version control

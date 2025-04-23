@@ -7,8 +7,12 @@ app = Flask(__name__)
 def index():
     return "Welcome to the Profile API!"
 
-@app.route('/api/profile', methods=['POST'])
+@app.route('/api/profile', methods=['GET'])
 def get_profile():
+    github_org = request.args.get('github_org')
+    bitbucket_team = request.args.get('bitbucket_team')
+    if not github_org or not bitbucket_team:
+        return jsonify({'error': 'Both github_org and bitbucket_team are required'}), 400
     return merge_profile()
 
 if __name__ == '__main__':
