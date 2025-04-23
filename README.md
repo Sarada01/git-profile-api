@@ -37,24 +37,22 @@ git-profile-api
    git clone https://github.com/sarada01/git-profile-api.git
    cd git-profile-api
    ```
-
 2. Install the required dependencies:
    Enable the vitural environment for python to avoid any version conflicts
    NOTE:  This code has been validated on Python 3.6.8 AND 3.9
-   
    ```
    python -m venv .venv
    ```
    Activate virtual environment in windows environment:
    
    ```
-   .venv\source\activate
+   .venv\scripts\activate
    ```
    Activate virtual environment in MAC environment:
    ```
    source .venv/bin/activate
    ```
-   
+   Install Dependencies required for running this application
    ```
    pip install -r requirements.txt
    ```
@@ -66,13 +64,11 @@ git-profile-api
    python src/app.py
    ```
 
-2. Access the API endpoint to merge profiles:
-   
-   NOTE: The application default would start at 5000 port.  Please make sure no other app is running at PORT = 5000
-   http://127.0.0.1:5000 should provide the default welcome message("Welcome to the Profile API!") for to confirm the server has started successfuly.
+2. Access the API endpoint to merge profiles: <BR>
+   **NOTE:** The application default would start at 5000 port.  Please make sure no other app is running at PORT = 5000 <BR >
+   URL: http://127.0.0.1:5000 should provide the default welcome message("Welcome to the Profile API!") to confirm the server has started successfuly.
    ```
-   
-   GET http://127.0.0.1:5000/api/profile?github_org=<GITHUB_ORG>&bitbucket_team=<BITBUCKET_TEAM>
+   GET: http://127.0.0.1:5000/api/profile?github_org=<GITHUB_ORG>&bitbucket_team=<BITBUCKET_TEAM>
    ```
 
    Replace `<GITHUB_ORG>` with the desired GitHub organization name and `<BITBUCKET_TEAM>` with the desired Bitbucket team name.
@@ -85,7 +81,8 @@ The API will return a JSON response containing the merged profile data, includin
 - List and count of repository topics
 
 ## Testing
-Before launching the test case, please cancel/disconnect the previous instance of the application 
+Before launching the test case, please cancel/disconnect the previous instance of the application <br> 
+**NOTE:**  Please ensure that, your Virtual environment is still active. 
 To run the unit tests, use the following command:
 ```
 pytest src/tests
