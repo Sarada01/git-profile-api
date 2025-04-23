@@ -1,5 +1,6 @@
 class Profile:
     def __init__(self, org_name, team_name):
+        # Initialize profile attributes
         self.org_name = org_name
         self.team_name = team_name
         self.public_repos = {
@@ -12,23 +13,35 @@ class Profile:
         self.topics = set()
 
     def add_repo(self, is_fork, language):
+        """
+        Adds a repository to the profile, updating counts and languages.
+        """
         self.public_repos['total'] += 1
         if is_fork:
             self.public_repos['forked'] += 1
         else:
             self.public_repos['original'] += 1
         
-        if language:
+        if language:  # Add language if it exists
             self.languages.add(language)
 
     def add_follower(self, count):
+        """
+        Adds followers to the profile.
+        """
         self.followers_count += count
 
     def add_topic(self, topic):
+        """
+        Adds a topic to the profile.
+        """
         if topic:
             self.topics.add(topic)
 
     def get_profile_summary(self):
+        """
+        Returns a summary of the profile as a dictionary.
+        """
         return {
             'organization': self.org_name,
             'team': self.team_name,
@@ -40,6 +53,9 @@ class Profile:
 
     @staticmethod
     def merge(github_data, bitbucket_data):
+        """
+        Merges GitHub and Bitbucket data into a single profile summary.
+        """
         profile = Profile(
             org_name=github_data.get('organization', 'Unknown'),
             team_name=bitbucket_data.get('team', 'Unknown')

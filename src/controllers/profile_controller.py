@@ -27,6 +27,7 @@ def merge_profile():
     bitbucket_data = bitbucket_service.get_team_data()
     github_data = github_service.get_organization_data()
 
+    # Check if either GitHub and Bitbucket data retrieval fail
     if github_data.get("error") is not None and bitbucket_data.get("error") is not None:
         return jsonify({'error': 'Failed to fetch data from GitHub or Bitbucket'}), 500
 
