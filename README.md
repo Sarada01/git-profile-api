@@ -67,6 +67,7 @@ git-profile-api
    ```
 
 2. Access the API endpoint to merge profiles:
+   
    NOTE: The application default would start at 5000 port.  Please make sure no other app is running PORT = 5000
    http://127.0.0.1:5000 should provide the default welcome message("Welcome to the Profile API!") for to confirm the server has started successfuly.
    ```
