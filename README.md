@@ -81,8 +81,10 @@ The API will return a JSON response containing the merged profile data, includin
 - List and count of repository topics
 
 ## Testing
-Before launching the test case, please cancel/disconnect the previous instance of the application <br> 
-**NOTE:**  Please ensure that, your Virtual environment is still active. 
+**NOTE:** 
+- Before launching the test case, please cancel/disconnect the previous instance of the application 
+- Please ensure that, your Virtual environment is still active.  <BR>
+
 To run the unit tests, use the following command:
 ```
 pytest src/tests
